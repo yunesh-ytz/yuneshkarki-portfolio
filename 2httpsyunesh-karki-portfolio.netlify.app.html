@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yunesh Karki - Writing Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0c0b0a;
+    --surface: #161412;
+    --surface2: #1e1b18;
+    --border: #2c2820;
+    --gold: #c9a96e;
+    --gold-dim: #8a7148;
+    --text: #ffffff;
+    --text-muted: #dcd6ce;
+    --text-dim: #a69f95;
+    --tag-seo: #1a2e1a;
+    --tag-seo-text: #7ec87e;
+    --tag-tech: #1a1f2e;
+    --tag-tech-text: #7ea8c8;
+    --tag-business: #2a1f1a;
+    --tag-business-text: #c89a7e;
+    --tag-blog: #221a2a;
+    --tag-blog-text: #b07ec8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    padding: 0 48px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -80px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    padding-bottom: 40px;
+  }
+
+  .header-label {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 6vw, 60px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  /* NEON GLOW ON ITALIC NAME */
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+    text-shadow: 0px 4px 25px rgba(201, 169, 110, 0.4);
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-top: 24px;
+    max-width: 480px;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  .header-meta {
+    margin-top: 36px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .header-meta a {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .header-meta a:hover { color: var(--gold); text-shadow: 0px 0px 10px rgba(201, 169, 110, 0.3); }
+
+  .header-meta a svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.6;
+  }
+
+  /* SCROLL HINT */
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px; left: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .scroll-hint::before {
+    content: '';
+    display: block;
+    width: 2px; height: 35px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollLine 2s infinite;
+    box-shadow: 0px 0px 8px rgba(201, 169, 110, 0.6);
+  }
+
+  @keyframes scrollLine {
+    0%   { transform: scaleY(0); transform-origin: top; }
+    50%  { transform: scaleY(1); transform-origin: top; }
+    51%  { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* NAV FILTERS */
+  .filter-bar {
+    padding: 0 48px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(12,11,10,0.95);
+    backdrop-filter: blur(12px);
+    z-index: 10;
+  }
+
+  .filter-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .filter-inner::-webkit-scrollbar { display: none; }
+
+  .filter-btn {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 18px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  .filter-btn:hover { color: var(--text-muted); }
+  
+  /* NEON GLOW ON ACTIVE TAB */
+  .filter-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+    text-shadow: 0px 0px 12px rgba(201, 169, 110, 0.5);
+    box-shadow: inset 0px -2px 10px -5px rgba(201, 169, 110, 0.4);
+  }
+
+  /* MAIN */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 48px 100px;
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 72px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .section-count {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  /* CARDS */
+  .card-grid {
+    display: grid;
+    gap: 2px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::after {
+    content: '?';
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    font-size: 16px;
+    color: var(--text-dim);
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .card:hover {
+    background: var(--surface2);
+    border-color: var(--gold-dim);
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .card:hover::after {
+    color: var(--gold);
+    transform: translate(2px, -2px);
+    text-shadow: 0px 0px 8px rgba(201, 169, 110, 0.4);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 2px;
+  }
+
+  .tag-seo { background: var(--tag-seo); color: var(--tag-seo-text); }
+  .tag-tech { background: var(--tag-tech); color: var(--tag-tech-text); }
+  .tag-business { background: var(--tag-business); color: var(--tag-business-text); }
+  .tag-blog { background: var(--tag-blog); color: var(--tag-blog-text); }
+
+  .card-client {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text);
+    margin-bottom: 10px;
+    padding-right: 40px;
+    transition: color 0.2s;
+  }
+
+  .card:hover .card-title { color: var(--gold); }
+
+  .card-desc {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    font-weight: 400;
+    max-width: 560px;
+  }
+
+  .card-footer {
+    margin-top: 16px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .card-stat {
+    font-size: 11px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* NEON GLOW ON STATS */
+  .card-stat strong {
+    color: var(--gold);
+    font-weight: 500;
+    text-shadow: 0px 0px 8px rgba(201, 169, 110, 0.4);
+  }
+
+  /* FEATURED CARD */
+  .card-featured {
+    background: linear-gradient(135deg, #1a1510 0%, #161412 100%);
+    border-color: var(--gold-dim);
+  }
+
+  .card-featured::before {
+    content: 'Featured';
+    position: absolute;
+    top: 0;
+    right: 60px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201,169,110,0.1);
+    padding: 4px 12px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0px 4px 10px rgba(201, 169, 110, 0.1);
+  }
+
+  /* DIVIDER CARD for coda */
+  .coda-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .card-small {
+    padding: 22px 24px;
+  }
+
+  .card-small .card-title {
+    font-size: 17px;
+  }
+
+  .card-small::after {
+    top: 22px;
+    right: 20px;
+    font-size: 14px;
+  }
+
+  /* ?? CTA BLOCK ?? */
+  .cta-block {
+    margin-top: 80px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 64px 60px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  .cta-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .cta-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+  }
+
+  .cta-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 28px;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  /* NEON GLOW ON PRIMARY CTA */
+  .cta-btn-primary { 
+    background: var(--gold); 
+    color: var(--bg); 
+    box-shadow: 0px 4px 15px rgba(201, 169, 110, 0.35);
+  }
+  .cta-btn-primary:hover { 
+    background: #dfc28d; 
+    box-shadow: 0px 6px 25px rgba(201, 169, 110, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .cta-btn-secondary { border: 1px solid var(--border); color: var(--text-muted); background: transparent; }
+  .cta-btn-secondary:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-links a:hover { color: var(--gold); text-shadow: 0px 0px 8px rgba(201, 169, 110, 0.4); }
+
+  /* HIDDEN STATE */
+  .section.hidden { display: none; }
+
+  @media (max-width: 640px) {
+    header, .filter-bar, main, footer { padding-left: 24px; padding-right: 24px; }
+    h1 { font-size: 48px; }
+    .coda-grid { grid-template-columns: 1fr; }
+    .header-meta { gap: 20px; }
+    .scroll-hint { display: none; } /* Hide scroll hint on small mobile screens to save space */
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-label">Writing Portfolio</div>
+    <h1>Yunesh<br><em>Karki</em></h1>
+    <p class="header-sub">SEO content writer and off-page analyst. Writing that ranks, reads well, and earns the click. Based in Kathmandu.</p>
+    <div class="header-meta">
+      <a href="mailto:yuneshkarki3@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+        yuneshkarki3@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/yuneshkarki" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        yuneshkarki
+      </a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</header>
+
+<nav class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active" onclick="filter('all')">All Work</button>
+    <button class="filter-btn" onclick="filter('seo')">SEO &amp; Tools</button>
+    <button class="filter-btn" onclick="filter('tech')">Technical</button>
+    <button class="filter-btn" onclick="filter('business')">Business</button>
+    <button class="filter-btn" onclick="filter('blog')">Blog &amp; Short-form</button>
+  </div>
+</nav>
+
+<main>
+
+  <section class="section" data-category="seo" id="sec-seo">
+    <div class="section-header">
+      <span class="section-title">SEO &amp; Tool Pages</span>
+      <span class="section-count">1 piece</span>
+    </div>
+    <div class="card-grid">
+      <a href="https://krispcall.com/tools/free-phone-number-checker/" target="_blank" class="card card-featured">
+        <div class="card-top">
+          <span class="tag tag-seo">SEO</span>
+          <span class="tag tag-seo">Tool Page</span>
+          <span class="card-client">KrispCall</span>
+        </div>
+        <div class="card-title">Free Phone Number Checker</div>
+        <div class="card-desc">Tool landing page for KrispCall's phone number lookup service. Covers carrier lookup, spam scoring, line type identification, and reverse phone search. Written to convert a high-intent audience who arrives with a specific task and a short attention span.</div>
+        <div class="card-footer">
+          <div class="card-stat"><strong>40,000+</strong> organic clicks</div>
+          <div class="card-stat">Tool page � Long-form copy</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" data-category="tech" id="sec-tech">
+    <div class="section-header">
+      <span class="section-title">Technical Writing</span>
+      <span class="section-count">1 piece</span>
+    </div>
+    <div class="card-grid">
+      <a href="https://krispcall.com/voip/sip-trunking/" target="_blank" class="card">
+        <div class="card-top">
+          <span class="tag tag-tech">Technical</span>
+          <span class="tag tag-tech">VoIP</span>
+          <span class="card-client">KrispCall</span>
+        </div>
+        <div class="card-title">SIP Trunking: What It Is, How It Works &amp; Best Practices</div>
+        <div class="card-desc">Comprehensive technical guide to SIP trunking for IT managers and telecoms decision-makers. Covers Session Border Controllers, bandwidth requirements per concurrent call (G.711 codec), QoS configuration, PBX compatibility, and migration strategy. Written for practitioners who will lose confidence in content that gets the numbers wrong.</div>
+        <div class="card-footer">
+          <div class="card-stat">Advanced audience � Long-form</div>
+          <div class="card-stat">KrispCall � 2024</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" data-category="business" id="sec-business">
+    <div class="section-header">
+      <span class="section-title">Business &amp; Long-form</span>
+      <span class="section-count">2 pieces</span>
+    </div>
+    <div class="card-grid">
+      <a href="https://danfe.io/blog/enterprise-learning-and-development/" target="_blank" class="card">
+        <div class="card-top">
+          <span class="tag tag-business">Business</span>
+          <span class="tag tag-business">HR &amp; L&D</span>
+          <span class="card-client">Danfe.io</span>
+        </div>
+        <div class="card-title">Enterprise Learning and Development: Key Strategies for Organizational Growth in 2026</div>
+        <div class="card-desc">Long-form strategy guide for HR and business leaders on scaling employee learning programs. Covers skills-based frameworks, aligning L&D with business objectives, leadership pipeline development, and measurement beyond completion rates. Written to be useful for readers who don't have an L&D background but are responsible for outcomes.</div>
+        <div class="card-footer">
+          <div class="card-stat">Business audience � Strategic guide</div>
+          <div class="card-stat">Published Dec 2025</div>
+        </div>
+      </a>
+      <a href="https://danfe.io/blog/what-is-microlearning-a-comprehensive-guide/" target="_blank" class="card">
+        <div class="card-top">
+          <span class="tag tag-business">Business</span>
+          <span class="tag tag-business">EdTech</span>
+          <span class="card-client">Danfe.io</span>
+        </div>
+        <div class="card-title">What Is Microlearning: A Comprehensive Guide</div>
+        <div class="card-desc">Definitive guide to microlearning for organizations evaluating training formats. Explains what microlearning is, when it works, when it doesn't, and how to implement it alongside existing L&D infrastructure. Targets HR managers and L&D leads making format decisions for distributed teams.</div>
+        <div class="card-footer">
+          <div class="card-stat">Long-form guide � Educational</div>
+          <div class="card-stat">Published May 2025</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" data-category="blog" id="sec-blog">
+    <div class="section-header">
+      <span class="section-title">Blog &amp; Short-form</span>
+      <span class="section-count">4 pieces</span>
+    </div>
+    <div class="coda-grid">
+      <a href="https://coda.io/d/_duLE0szwHzX/How-to-Write-Engaging-Blogs_su1K6" target="_blank" class="card card-small">
+        <div class="card-top">
+          <span class="tag tag-blog">Blog</span>
+          <span class="tag tag-blog">Content</span>
+        </div>
+        <div class="card-title">How to Write Engaging Blogs</div>
+        <div class="card-desc">A practical breakdown of what separates forgettable blog posts from ones readers finish. Covers structure, hook writing, and keeping momentum through the body.</div>
+      </a>
+      <a href="https://coda.io/d/_d_u9qVkf-99/What-All-Successful-Startups-Have-in-Common_suXax" target="_blank" class="card card-small">
+        <div class="card-top">
+          <span class="tag tag-blog">Business</span>
+          <span class="tag tag-blog">Opinion</span>
+        </div>
+        <div class="card-title">What All Successful Startups Have in Common</div>
+        <div class="card-desc">Business audience essay arguing the differentiator between startups that survive and those that don't isn't resources or timing - it's a set of repeatable behaviors practiced before there's anything to show for them.</div>
+      </a>
+      <a href="https://coda.io/d/_df3u-qo8XOC/5-proven-facts-about-social-media-content_suzMg" target="_blank" class="card card-small">
+        <div class="card-top">
+          <span class="tag tag-blog">Social Media</span>
+          <span class="tag tag-blog">Opinion</span>
+        </div>
+        <div class="card-title">5 Proven Facts About Social Media Content</div>
+        <div class="card-desc">Pushes back on the volume-first content playbook most marketers default to. Argues that differentiation and positioning matter more than posting frequency - an unpopular take in a world that sells scheduling tools.</div>
+      </a>
+      <a href="https://coda.io/d/_dHEu8ITKUSQ/5-habits-of-successful-content-creators_suQED" target="_blank" class="card card-small">
+        <div class="card-top">
+          <span class="tag tag-blog">Content</span>
+          <span class="tag tag-blog">Creators</span>
+        </div>
+        <div class="card-title">5 Habits of Successful Content Creators</div>
+        <div class="card-desc">Practitioner-level breakdown of the habits that separate consistent creators from those who produce in bursts. Grounded in real behaviors rather than motivational advice.</div>
+      </a>
+    </div>
+  </section>
+
+  <div class="cta-block">
+    <h2 class="cta-title">Let's Rank Your Content</h2>
+    <p class="cta-sub">Open to new SEO content writing and strategy projects for SaaS and technology brands.</p>
+    <div class="cta-links">
+      <a href="mailto:yuneshkarki3@gmail.com" class="cta-btn cta-btn-primary">yuneshkarki3@gmail.com</a>
+      <a href="https://linkedin.com/in/yuneshkarki" target="_blank" class="cta-btn cta-btn-secondary">LinkedIn Profile</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-name">Yunesh Karki</span>
+    <div class="footer-links">
+      <a href="mailto:yuneshkarki3@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/yuneshkarki" target="_blank">LinkedIn</a>
+      <a href="tel:+9779808239636">+977 9808239636</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function filter(cat) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+
+    document.querySelectorAll('.section').forEach(s => {
+      if (cat === 'all') {
+        s.classList.remove('hidden');
+      } else {
+        s.dataset.category === cat
+          ? s.classList.remove('hidden')
+          : s.classList.add('hidden');
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
